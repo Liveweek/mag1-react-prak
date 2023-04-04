@@ -23,7 +23,7 @@ function App() {
 
   const [field, setField] = useState('')
 
-  const [weather, setWeather] = useState(0)
+  const [weather, setWeather] = useState()
   let w = {
     "request": {
         "type": "City",
@@ -75,13 +75,9 @@ function App() {
           <Heading>Прогноз погоды</Heading>
           <HStack mt="20px">
             <Input mr="10px" placeholder="Введите название города" onChange={(e) => setField(e.target.value)}/>
-            <Button variant="solid" onClick={async () => {
-                let w = await getWeather(field);
-                setWeather(w)
-              }
-            }>Погода!</Button>
+            <Button variant="solid" onClick={() => {getWeather(field, setWeather)}}>Погода!</Button>
           </HStack>
-          {weather != 0 && <Weather weather={weather}/>}
+          {weather && <Weather weather={weather}/>}
           
         </Box>
       </Container>
